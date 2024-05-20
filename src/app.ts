@@ -1,6 +1,11 @@
-import express from 'express';
+import express, { Application } from 'express';
+import cors from 'cors';
 
-const app = express();
+const app: Application = express();
+
+// parsers
+app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
