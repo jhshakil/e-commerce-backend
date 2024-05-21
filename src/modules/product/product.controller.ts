@@ -13,10 +13,11 @@ const createProduct = async (req: Request, res: Response) => {
       message: 'Product is created successfully',
       data: result,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || 'Something went wrong',
+      message:
+        (error instanceof Error && error.message) || 'Something went wrong',
       data: error,
     });
   }
@@ -33,10 +34,11 @@ const getAllProduct = async (req: Request, res: Response) => {
       message: 'Get all product successfully',
       data: result,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || 'Something went wrong',
+      message:
+        (error instanceof Error && error.message) || 'Something went wrong',
       data: error,
     });
   }
@@ -52,10 +54,11 @@ const getSingleProduct = async (req: Request, res: Response) => {
       message: 'Get product successfully',
       data: result,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || 'Something went wrong',
+      message:
+        (error instanceof Error && error.message) || 'Something went wrong',
       data: error,
     });
   }
@@ -76,10 +79,11 @@ const updateSingleProduct = async (req: Request, res: Response) => {
       message: 'Update product successfully',
       data: result,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || 'Something went wrong',
+      message:
+        (error instanceof Error && error.message) || 'Something went wrong',
       data: error,
     });
   }
@@ -95,10 +99,11 @@ const deleteProduct = async (req: Request, res: Response) => {
       message: 'Product deleted successfully!',
       data: null,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || 'Something went wrong',
+      message:
+        (error instanceof Error && error.message) || 'Something went wrong',
       data: error,
     });
   }

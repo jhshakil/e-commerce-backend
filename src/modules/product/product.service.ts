@@ -16,7 +16,7 @@ const getAllProductIntoDB = async (searchTerm: string) => {
   }
 };
 
-const getSingleProductIntoDB = async (id: any) => {
+const getSingleProductIntoDB = async (id: string) => {
   const result = await Product.findOne({ _id: id });
   return result;
 };
