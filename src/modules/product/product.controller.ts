@@ -67,8 +67,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
 const updateSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const { product: productData } = req.body;
-    const zodParsedData = productValidationSchema.parse(productData);
+    const { product } = req.body;
+    const zodParsedData = productValidationSchema.parse(product);
     const result = await ProductServices.updateSingleProductIntoDB(
       productId,
       zodParsedData,
