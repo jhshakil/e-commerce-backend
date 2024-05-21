@@ -4,9 +4,9 @@
   "description": "",
   "main": "./dist/server.js",
   "scripts": {
-    "start:prod": "node ./dist/server.js",
+    "start": "node ./dist/server.js",
     "start:dev": "tsnd --respawn src/server.ts",
-    "build": "tsc -w",
+    "build": "tsc",
     "lint": "npx eslint **/*.ts",
     "lint:fix": "npx eslint src --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
