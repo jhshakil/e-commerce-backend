@@ -8,7 +8,7 @@ const createOrderIntoDB = async (order: TOrder) => {
 
 const getAllOrderIntoDb = async (email: string) => {
   if (email) {
-    const result = await Order.findOne({ email });
+    const result = await Order.find({ email });
     return result;
   } else {
     const result = await Order.find();
