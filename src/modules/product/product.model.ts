@@ -22,6 +22,10 @@ const productSchema = new Schema<TProduct>({
     type: inventorySchema,
     required: [true, 'inventory is required'],
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const Product = model<TProduct>('Product', productSchema);
