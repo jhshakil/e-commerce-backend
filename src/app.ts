@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { ProductRoutes } from './modules/product/product.route';
 import { OrderRouters } from './modules/order/order.route';
@@ -15,6 +15,13 @@ app.use('/api/orders', OrderRouters);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
+});
+
+app.all('*', (req: Request, res: Response) => {
+  res.status(400).json({
+    success: false,
+    message: 'Route not found',
+  });
 });
 
 export default app;
