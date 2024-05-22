@@ -22,6 +22,6 @@ export type TProduct = {
 };
 
 export interface ProductModel extends Model<TProduct> {
-  isStockAvailable(id: string): Promise<boolean>;
+  isStockAvailable(id: string, quantity: number): Promise<boolean>;
   reduceQuantity(id: string, quantity: number): void;
 }

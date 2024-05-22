@@ -42,10 +42,17 @@ productSchema.pre('findOne', function (next) {
   next();
 });
 
-productSchema.statics.isStockAvailable = async function (id: string) {
+productSchema.statics.isStockAvailable = async function (
+  id: string,
+  quantity: number,
+) {
   const availableStock = await Product.findOne({ _id: id });
-  if (availableStock) {
-    return availableStock.inventory.inStock;
+  if (
+    availableStock &&
+    availableStock.inventory.inStock &&
+    availableStock.inventory.quantity >= quantity
+  ) {
+    return true;
   } else {
     return false;
   }

@@ -3,7 +3,7 @@ import { TOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrderIntoDB = async (order: TOrder) => {
-  if (await Product.isStockAvailable(order.productId)) {
+  if (await Product.isStockAvailable(order.productId, order.quantity)) {
     const result = await Order.create(order);
     await Product.reduceQuantity(order.productId, order.quantity);
     return result;
