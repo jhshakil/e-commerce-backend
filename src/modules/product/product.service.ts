@@ -23,6 +23,7 @@ const getSingleProductIntoDB = async (id: string) => {
 
 const updateSingleProductIntoDB = async (id: string, product: TProduct) => {
   const result = await Product.updateOne({ _id: id }, { $set: product });
+
   return result;
 };
 

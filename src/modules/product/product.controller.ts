@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import { ProductServices } from './product.service';
-import productValidationSchema from './product.validation';
+import { validationSchema } from './product.validation';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { product } = req.body;
-    const zodParsedData = productValidationSchema.parse(product);
+    const zodParsedData =
+      validationSchema.productValidationSchema.parse(product);
     const result = await ProductServices.createProductIntoDB(zodParsedData);
 
     res.status(200).json({
@@ -68,10 +69,12 @@ const updateSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const { product } = req.body;
-    const zodParsedData = productValidationSchema.parse(product);
+    const zodParsedData =
+      validationSchema.productValidationUpdateSchema.parse(product);
+
     const result = await ProductServices.updateSingleProductIntoDB(
       productId,
-      zodParsedData,
+      product,
     );
 
     res.status(200).json({
