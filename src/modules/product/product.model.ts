@@ -51,4 +51,25 @@ productSchema.statics.isStockAvailable = async function (id: string) {
   }
 };
 
+productSchema.statics.reduceQuantity = async function (
+  id: string,
+  quantity: number,
+) {
+  const findProduct = await Product.findOne({ _id: id });
+  if (findProduct && quantity <= findProduct.inventory.quantity) {
+    await Product.updateOne(
+      { _id: id },
+      {
+        $set: {
+          inventory: {
+            quantity: findProduct.inventory.quantity - quantity,
+            inStock:
+              findProduct.inventory.quantity - quantity === 0 ? false : true,
+          },
+        },
+      },
+    );
+  }
+};
+
 export const Product = model<TProduct, ProductModel>('Product', productSchema);

@@ -5,6 +5,7 @@ import { Order } from './order.model';
 const createOrderIntoDB = async (order: TOrder) => {
   if (await Product.isStockAvailable(order.productId)) {
     const result = await Order.create(order);
+    await Product.reduceQuantity(order.productId, order.quantity);
     return result;
   } else {
     throw new Error('Insufficient quantity available in inventory');
