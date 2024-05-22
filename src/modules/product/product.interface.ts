@@ -1,3 +1,5 @@
+import { Model } from 'mongoose';
+
 export type TVariant = {
   type: string;
   value: string;
@@ -18,3 +20,7 @@ export type TProduct = {
   inventory: TInventory;
   isDeleted?: boolean;
 };
+
+export interface ProductModel extends Model<TProduct> {
+  isStockAvailable(id: string): Promise<boolean>;
+}

@@ -1,9 +1,14 @@
+import { Product } from '../product/product.model';
 import { TOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrderIntoDB = async (order: TOrder) => {
-  const result = await Order.create(order);
-  return result;
+  if (await Product.isStockAvailable(order.productId)) {
+    const result = await Order.create(order);
+    return result;
+  } else {
+    throw new Error('Insufficient quantity available in inventory');
+  }
 };
 
 const getAllOrderIntoDb = async (email: string) => {

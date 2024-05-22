@@ -1,5 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { TInventory, TProduct, TVariant } from './product.interface';
+import {
+  ProductModel,
+  TInventory,
+  TProduct,
+  TVariant,
+} from './product.interface';
 
 const variantSchema = new Schema<TVariant>({
   type: { type: String, required: [true, 'type is required'] },
@@ -37,4 +42,13 @@ productSchema.pre('findOne', function (next) {
   next();
 });
 
-export const Product = model<TProduct>('Product', productSchema);
+productSchema.statics.isStockAvailable = async function (id: string) {
+  const availableStock = await Product.findOne({ _id: id });
+  if (availableStock) {
+    return availableStock.inventory.inStock;
+  } else {
+    return false;
+  }
+};
+
+export const Product = model<TProduct, ProductModel>('Product', productSchema);
